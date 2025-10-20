@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Weather Web</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=cool_to_dry" />
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="navBar">
+            <h3>Weather Forecast</h3>
+            <div class="searchBar">
+                <input type="text" id="cityValue"placeholder="Search for a City">
+                <button id="searchBtn" onclick="fetchData()"><i class="fa-solid fa-magnifying-glass"></i></button>
+            </div>
+        </div>
+        <div class="parentDiv">
+            <div class="leftDiv">
+                <div class="divTop">
+                    <h5 id="cityName" style="padding: 10px;font-size: x-large;font-weight: 300;">City Name</h5>
+                    <h6  style="margin: 3px 10px;font-size: larger;font-weight: 400;"> <span id="temp">0</span> &deg;C</h6>
+                    <h5 id="desc" style="margin: 3px  10px;font-size: medium;font-weight: 300;">Sky Description</h5>
+                    <hr id="line" style="margin-top: 10px;"></hr>
+                    <div class="dateDiv">
+                        <i class="fa-solid fa-calendar-days"></i>
+                        <p id="date" style="padding: 4px;">Date</p>
+                    </div>
+                    <div class="timeDiv" >
+                        <i class="fa-solid fa-clock"></i>
+                        <p id="time" style="padding: 4px;">Time</p>
+                    </div>
+                </div>
+                <div class="divBottom">
+                    <h5 style="padding: 10px; font-size: large;">Coming 5 days</h5>
+                    <div class="forecastRow">
+                        <div style="display: flex;">
+                            <i class="fa-solid fa-temperature-half"></i>
+                            <p><span id="temp1">0</span></sp> &deg;C</p>
+                        </div>
+                        <p id="day1" >Day</p>
+                        <p id="date1" >Date</p>
+                    </div>
+                    <div class="forecastRow">
+                        <div style="display: flex;">
+                            <i class="fa-solid fa-temperature-half"></i>
+                            <p><span id="temp2">0</span> &deg;C</p>
+                        </div>
+                        <p id="day2" >Day</p>
+                        <p id="date2" >Date</p>
+                    </div>
+                    <div class="forecastRow">
+                        <div style="display: flex;">
+                            <i class="fa-solid fa-temperature-half"></i>
+                            <p><span id="temp3">0</span> &deg;C</p>
+                        </div>
+                        <p id="day3" >Day</p>
+                        <p id="date3" >Date</p>
+                    </div>
+                    <div class="forecastRow">
+                        <div style="display: flex;">
+                        <i class="fa-solid fa-temperature-half"></i>
+                        <p><span id="temp4">0</span> &deg;C</p>
+                    </div>
+                        <p id="day4" >Day</p>
+                        <p id="date4" >Date</p>
+                </div>
+                <div class="forecastRow">
+                    <div style="display: flex;">
+                        <i class="fa-solid fa-temperature-half"></i>
+                        <p><span id="temp5">0</span> &deg;C</p>
+                    </div>
+                        <p id="day5" >Day</p>
+                        <p id="date5" >Date</p>
+                    </div>
+                </div>
+            </div>
+            <div class="rightDiv">
+                <div class="divOne">
+                    <div class="measures" id="humidity">
+                        <span class="material-symbols-outlined">cool_to_dry</span>
+                        <p>Humidity</p>
+                        <h5 ><span id="humidity-value">0</span> %</h5>
+                    </div>
+                    <div class="measures" id="pressure">
+                         <i class="fa-solid fa-wave-square"></i>
+                        <p>Pressure</p>
+                            <h5><span  id="pressure-value">0</span> hPa</h5>
+                    </div>
+                    <div class="measures" id="feels-like">
+                        <i class="fa-solid fa-temperature-high"></i>
+                        <p>Feels-like</p>
+                        <h5 ><span id="feels-like-value">0</span> &deg;C</h5>
+                    </div>
+                    <div class="measures" id="visibility">
+                        <i class="fa-solid fa-eye-slash"></i>
+                        <p>Visibility</p>
+                        <h5><span id="visibility-value">0</span> Kilometers</h5>
+                    </div>
+                </div>
+                <div class="divTwo">
+                    <div id="wind-speed">
+
+                    </div>
+                    <div id="rise-set">
+                        
+                    </div>
+                    <div id="aqi">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous">
+        </script>
+        <script src="./script.js" defer></script>
+    </body>
+ </html>
