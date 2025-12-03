@@ -62,8 +62,12 @@ async function  fetchData() {
     $('#so2-value')[0].innerText = formattedAirpolData.list[0].components.so2;
     $('#aqi-status')[0].innerText = getAQIstatus(formattedAirpolData.list[0].main.aqi)
 
+    // Update sun/moon orbit with sunrise/sunset data
+    updateSunMoonOrbit(formattedData.sys.sunrise, formattedData.sys.sunset, formattedData.timezone);
     
-
+    // Update sunrise/sunset times in UI
+    $('#sunrise-time')[0].innerText = timeConvert(formattedData.sys.sunrise, formattedData.timezone).slice(0, 5);
+    $('#sunset-time')[0].innerText = timeConvert(formattedData.sys.sunset, formattedData.timezone).slice(0, 5);
 }
 function dateConvert(timestamp, timezone){
     let dateObj = new Date(timestamp*1000 + timezone*1000);
@@ -94,6 +98,33 @@ function getAQIstatus(value){
         case 5: $('#aqi-status')[0].style.color = 'red';
         return 'Very Poor';
     }
+}
+
+function updateSunMoonOrbit(sunrise, sunset, timezone) {
+    const now = Date.now() / 1000;
+    const sunriseTime = sunrise;
+    const sunsetTime = sunset;
+    const sunMoon = document.getElementById('sunMoon');
+    
+    let angle, isDaytime;
+    
+    if (now >= sunriseTime && now <= sunsetTime) {
+        // Daytime: sun moves from left (sunrise) to right (sunset)
+        const dayProgress = (now - sunriseTime) / (sunsetTime - sunriseTime);
+        angle = 180 - (dayProgress * 180); // 180° to 0° (left to right on top)
+        isDaytime = true;
+    } else {
+        // Nighttime: moon on bottom half
+        angle = 0;
+        isDaytime = false;
+    }
+    
+    const x = 75 + 65 * Math.cos(angle * Math.PI / 180);
+    const y = 75 - 65 * Math.sin(angle * Math.PI / 180);
+    
+    sunMoon.style.left = x - 12.5 + 'px';
+    sunMoon.style.top = y - 12.5 + 'px';
+    sunMoon.innerHTML = isDaytime ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
 }
 
 

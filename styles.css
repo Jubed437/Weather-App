@@ -179,6 +179,107 @@ input{
   border-radius: 15px;
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(5px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15px;
+}
+
+.orbit-container {
+  position: relative;
+  width: 160px;
+  height: 160px;
+  margin: 20px auto;
+}
+
+.orbit-circle {
+  width: 100%;
+  height: 100%;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  position: absolute;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.orbit-glow {
+  width: 100%;
+  height: 100%;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  position: absolute;
+  animation: pulse 3s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.05); opacity: 0.6; }
+}
+
+.center-dot {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+.sun-moon {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.8s ease;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+}
+
+.sun-moon i {
+  color: #FFD700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+}
+
+.time-label {
+  position: absolute;
+  font-size: 11px;
+  font-weight: 600;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.time-label.top { top: -15px; left: 50%; transform: translateX(-50%); }
+.time-label.bottom { bottom: -15px; left: 50%; transform: translateX(-50%); }
+.time-label.left { left: -35px; top: 50%; transform: translateY(-50%); }
+.time-label.right { right: -35px; top: 50%; transform: translateY(-50%); }
+
+.sun-times {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 15px;
+  padding: 0 10px;
+  gap: 30px;
+}
+
+.sun-time-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.sun-time-item i {
+  font-size: 16px;
+  color: #FFD700;
 }
 
 
