@@ -4,14 +4,18 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Weather Web</title>
+        <!-- Google Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300..700&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap" rel="stylesheet">
+        <!-- Font Awesome Icons -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <!-- Material Icons -->
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=cool_to_dry" />
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
+        <!-- Navigation Bar with Search -->
         <div class="navBar">
             <h3>Weather Forecast</h3>
             <div class="searchBar">
@@ -19,7 +23,9 @@
                 <button id="searchBtn" onclick="fetchData()"><i class="fa-solid fa-magnifying-glass"></i></button>
             </div>
         </div>
+        <!-- Main Content Container -->
         <div class="parentDiv">
+            <!-- Left Panel: Current Weather & 5-Day Forecast -->
             <div class="leftDiv">
                 <div class="divTop">
                     <h5 id="cityName" style="padding: 10px;font-size: x-large;font-weight: 300;">City Name</h5>
@@ -79,7 +85,9 @@
                     </div>
                 </div>
             </div>
+            <!-- Right Panel: Weather Details -->
             <div class="rightDiv">
+                <!-- Weather Metrics Row -->
                 <div class="divOne">
                     <div class="measures" id="humidity">
                         <span class="material-symbols-outlined">cool_to_dry</span>
@@ -102,7 +110,9 @@
                         <h5><span id="visibility-value">0</span> Kilometers</h5>
                     </div>
                 </div>
+                <!-- Bottom Row: AQI, Sun/Moon, Wind -->
                 <div class="divTwo">
+                    <!-- Air Quality Index -->
                     <div id="aqi">
                         <h4>AQI Features</h4>
                         <div class="aqi-contanier">
@@ -128,6 +138,7 @@
                             <p id="aqi-status"> Normal</p>
                         </div>
                     </div>
+                    <!-- Sun & Moon Orbit -->
                     <div id="rise-set">
                         <h4>Sunrise & Sunset</h4>
                         <div class="orbit-container">
@@ -156,8 +167,34 @@
                             </div>
                         </div>
                     </div>
+                    <!-- Wind Compass & Data -->
                     <div id="wind-speed">
-
+                        <h4>Wind</h4>
+                        <div class="wind-container">
+                            <div class="wind-compass">
+                                <div class="compass-circle">
+                                    <div class="compass-direction n">N</div>
+                                    <div class="compass-direction e">E</div>
+                                    <div class="compass-direction s">S</div>
+                                    <div class="compass-direction w">W</div>
+                                    <div class="wind-arrow" id="windArrow">
+                                        <i class="fa-solid fa-location-arrow"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wind-info">
+                                <div class="wind-item">
+                                    <i class="fa-solid fa-wind"></i>
+                                    <span>Speed</span>
+                                    <span id="wind-speed-value">0</span> km/h
+                                </div>
+                                <div class="wind-item">
+                                    <i class="fa-solid fa-compass"></i>
+                                    <span>Direction</span>
+                                    <span id="wind-direction-value">N</span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,3 +1,4 @@
+/* Global Styles */
 *{
   font-family: "Comfortaa", sans-serif;
   margin: 0;
@@ -5,6 +6,7 @@
   box-sizing: border-box;
   color: white;
 }
+/* Body Background */
 body{
   background-image: url("./images/clear.jpg");
   transition: background-image 1.2s ease-in-out;
@@ -16,6 +18,7 @@ h3{
   padding-left: 10px;
   font-size: 1.5rem;
 }
+/* Navigation Bar */
 .navBar{
   height: 8vh;
   display: flex;
@@ -59,6 +62,7 @@ input{
   cursor: pointer;
   opacity: 0.7;
 }
+/* Main Layout */
 .parentDiv{
   display: flex;
   width: 100%;
@@ -185,6 +189,7 @@ input{
   padding: 15px;
 }
 
+/* Sun/Moon Orbit Styles */
 .orbit-container {
   position: relative;
   width: 160px;
@@ -289,11 +294,81 @@ input{
 #wind-speed{
   width: 40%;
   height: 60vh;
-  align-items: center ;
+  align-items: center;
   display: flex;
   justify-content: center;
   flex-direction: column;
   border-radius: 15px;
   background-color: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(5px);
+  padding: 20px;
+}
+
+/* Wind Visualization Styles */
+.wind-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.wind-compass {
+  position: relative;
+  width: 120px;
+  height: 120px;
+}
+
+.compass-circle {
+  width: 100%;
+  height: 100%;
+  border: 3px solid rgba(255, 255, 255, 0.4);
+  border-radius: 50%;
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.compass-direction {
+  position: absolute;
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.compass-direction.n { top: -5px; left: 50%; transform: translateX(-50%); }
+.compass-direction.e { right: -5px; top: 50%; transform: translateY(-50%); }
+.compass-direction.s { bottom: -5px; left: 50%; transform: translateX(-50%); }
+.compass-direction.w { left: -5px; top: 50%; transform: translateY(-50%); }
+
+.wind-arrow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 24px;
+  color: #00BFFF;
+  transition: transform 0.5s ease;
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.6);
+}
+
+.wind-info {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+}
+
+.wind-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-size: 14px;
+}
+
+.wind-item i {
+  color: #00BFFF;
+  margin-right: 8px;
 }

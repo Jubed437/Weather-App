@@ -1,13 +1,25 @@
+// Main function to fetch and display weather data
 async function  fetchData() {
-    let cityName = document.getElementById("cityValue").value;
-    let fetchedData = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=308bc645518c01f82fb25d217722f968&units=metric`);
-    let formattedData = await fetchedData.json();
+    try {
+        let cityName = document.getElementById("cityValue").value;
+        // Fetch current weather data
+        let fetchedData = await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=308bc645518c01f82fb25d217722f968&units=metric`);
+        
+        if (!fetchedData.ok) {
+            alert("City not found. Please enter a valid city name.");
+            return;
+        }
+        
+        let formattedData = await fetchedData.json();
     let latitude = formattedData.coord.lat;
     let longitude = formattedData.coord.lon;
+    // Fetch 5-day forecast data
     let forecastData = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=308bc645518c01f82fb25d217722f968&units=metric`)
     let formattedForecastData = await forecastData.json();
+    // Fetch air pollution data
     let airpolData = await fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=308bc645518c01f82fb25d217722f968`)
     let formattedAirpolData = await airpolData.json();
+    // Dynamic background based on weather condition
     const weatherBackgrounds  = {
         'clouds' : "./images/cloudy.jpeg",
         'sunny' : "./images/sunny.jpg",
@@ -68,7 +80,16 @@ async function  fetchData() {
     // Update sunrise/sunset times in UI
     $('#sunrise-time')[0].innerText = timeConvert(formattedData.sys.sunrise, formattedData.timezone).slice(0, 5);
     $('#sunset-time')[0].innerText = timeConvert(formattedData.sys.sunset, formattedData.timezone).slice(0, 5);
+    
+    // Update wind data
+    updateWindDisplay(formattedData.wind.speed, formattedData.wind.deg);
+    
+    } catch (error) {
+        alert("City not found. Please enter a valid city name.");
+    }
 }
+
+// Utility functions for time/date conversion
 function dateConvert(timestamp, timezone){
     let dateObj = new Date(timestamp*1000 + timezone*1000);
     return dateObj.toISOString().split('T')[0];
@@ -88,18 +109,19 @@ function getAQIstatus(value){
     switch(value)
     {
         case 1: $('#aqi-status')[0].style.color = 'green';
-        return 'Good';
+            return 'Good';
         case 2: $('#aqi-status')[0].style.color = 'green';
-        return 'Fair';
+            return 'Fair';
         case 3: $('#aqi-status')[0].style.color = 'yellow';
-        return 'Moderate';
+            return 'Moderate';
         case 4: $('#aqi-status')[0].style.color = 'red';
-        return 'Poor';
+            return 'Poor';
         case 5: $('#aqi-status')[0].style.color = 'red';
-        return 'Very Poor';
+            return 'Very Poor';
     }
 }
 
+// Update sun/moon position based on time
 function updateSunMoonOrbit(sunrise, sunset, timezone) {
     const now = Date.now() / 1000;
     const sunriseTime = sunrise;
@@ -125,6 +147,24 @@ function updateSunMoonOrbit(sunrise, sunset, timezone) {
     sunMoon.style.left = x - 12.5 + 'px';
     sunMoon.style.top = y - 12.5 + 'px';
     sunMoon.innerHTML = isDaytime ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+}
+
+// Update wind compass and data
+function updateWindDisplay(speed, direction) {
+    const windArrow = document.getElementById('windArrow');
+    const speedKmh = (speed * 3.6).toFixed(1); // Convert m/s to km/h
+    const directionText = getWindDirection(direction);
+    
+    $('#wind-speed-value')[0].innerText = speedKmh;
+    $('#wind-direction-value')[0].innerText = directionText;
+    
+    windArrow.style.transform = `translate(-50%, -50%) rotate(${direction}deg)`;
+}
+
+function getWindDirection(degrees) {
+    const directions = ['N', 'NNE', 'NE', 'ENE', 'E', 'ESE', 'SE', 'SSE', 'S', 'SSW', 'SW', 'WSW', 'W', 'WNW', 'NW', 'NNW'];
+    const index = Math.round(degrees / 22.5) % 16;
+    return directions[index];
 }
 
 
