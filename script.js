@@ -6,8 +6,8 @@ async function  fetchData() {
     let longitude = formattedData.coord.lon;
     let forecastData = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=308bc645518c01f82fb25d217722f968&units=metric`)
     let formattedForecastData = await forecastData.json();
-
-    console.log(formattedData.weather[0].main.toLowerCase())
+    let airpolData = await fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${latitude}&lon=${longitude}&appid=308bc645518c01f82fb25d217722f968`)
+    let formattedAirpolData = await airpolData.json();
     const weatherBackgrounds  = {
         'clouds' : "./images/cloudy.jpeg",
         'sunny' : "./images/sunny.jpg",
@@ -55,6 +55,15 @@ async function  fetchData() {
     $('#feels-like-value')[0].innerText = formattedData.main.feels_like;
     $('#visibility-value')[0].innerText = formattedData.visibility/1000;
 
+
+    $('#co-value')[0].innerText = formattedAirpolData.list[0].components.co;
+    $('#no2-value')[0].innerText = formattedAirpolData.list[0].components.no2;
+    $('#o3-value')[0].innerText = formattedAirpolData.list[0].components.o3;
+    $('#so2-value')[0].innerText = formattedAirpolData.list[0].components.so2;
+    $('#aqi-status')[0].innerText = getAQIstatus(formattedAirpolData.list[0].main.aqi)
+
+    
+
 }
 function dateConvert(timestamp, timezone){
     let dateObj = new Date(timestamp*1000 + timezone*1000);
@@ -71,7 +80,21 @@ function getDay(timestamp){
     return days[dayObj.getUTCDay()];
 }
 
-
+function getAQIstatus(value){
+    switch(value)
+    {
+        case 1: $('#aqi-status')[0].style.color = 'green';
+        return 'Good';
+        case 2: $('#aqi-status')[0].style.color = 'green';
+        return 'Fair';
+        case 3: $('#aqi-status')[0].style.color = 'yellow';
+        return 'Moderate';
+        case 4: $('#aqi-status')[0].style.color = 'red';
+        return 'Poor';
+        case 5: $('#aqi-status')[0].style.color = 'red';
+        return 'Very Poor';
+    }
+}
 
 
 
